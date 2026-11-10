@@ -1,0 +1,50 @@
+{% extends 'pdf_tool/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="content-section">
+            <h2 class="mb-4 text-center">Merge Multiple PDFs</h2>
+            
+            {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            
+            {% if download_url %}
+            <div class="alert alert-success text-center" role="alert">
+                <h4 class="alert-heading">Success!</h4>
+                <p>Your PDFs have been successfully merged.</p>
+                <hr>
+                <a href="{{ download_url }}" class="btn btn-success" download>Download Merged PDF</a>
+            </div>
+            <div class="text-center mt-3">
+                <a href="{% url 'merge_pdf' %}" class="btn btn-outline-primary">Merge More PDFs</a>
+            </div>
+            {% else %}
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="mb-4">
+                    {{ form.files.label_tag }}
+                    {{ form.files }}
+                    {% if form.files.errors %}
+                        <div class="text-danger mt-1">
+                            {{ form.files.errors }}
+                        </div>
+                    {% endif %}
+                    <div class="form-text">Select at least 2 PDF files. Hold Ctrl/Cmd to select multiple files.</div>
+                </div>
+                
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Merge PDFs</button>
+                </div>
+            </form>
+            
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

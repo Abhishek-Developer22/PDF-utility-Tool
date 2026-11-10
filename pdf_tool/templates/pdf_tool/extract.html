@@ -1,0 +1,60 @@
+{% extends 'pdf_tool/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="content-section">
+            <h2 class="mb-4 text-center">Extract PDF Pages</h2>
+            
+            {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            
+            {% if download_url %}
+            <div class="alert alert-success text-center" role="alert">
+                <h4 class="alert-heading">Success!</h4>
+                <p>Pages have been successfully extracted.</p>
+                <hr>
+                <a href="{{ download_url }}" class="btn btn-success" download>Download Extracted PDF</a>
+            </div>
+            <div class="text-center mt-3">
+                <a href="{% url 'extract_pdf' %}" class="btn btn-outline-primary">Extract More Pages</a>
+            </div>
+            {% else %}
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    {{ form.pdf_file.label_tag }}
+                    {{ form.pdf_file }}
+                    {% if form.pdf_file.errors %}
+                        <div class="text-danger mt-1">
+                            {{ form.pdf_file.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="mb-4">
+                    {{ form.page_range.label_tag }}
+                    {{ form.page_range }}
+                    {% if form.page_range.errors %}
+                        <div class="text-danger mt-1">
+                            {{ form.page_range.errors }}
+                        </div>
+                    {% endif %}
+                    <div class="form-text">Example: 1,3,5 or 2-8 or 1,4,7-12</div>
+                </div>
+                
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Extract Pages</button>
+                </div>
+            </form>
+            
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

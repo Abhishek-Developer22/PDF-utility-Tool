@@ -1,0 +1,25 @@
+{% extends 'pdf_tool/base.html' %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-5 fw-bold">PDF Utility Tool</h1>
+    <p class="lead text-muted">Merge and extract your PDFs — fast, free, and effortless.</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="content-section text-center h-100 d-flex flex-column justify-content-center align-items-center">
+            <h3>Merge PDF</h3>
+            <p class="text-muted">Combine multiple PDF files into a single document easily.</p>
+            <a href="{% url 'merge_pdf' %}" class="btn btn-primary mt-3 px-4 py-2">Merge PDFs</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="content-section text-center h-100 d-flex flex-column justify-content-center align-items-center">
+            <h3>Extract Pages</h3>
+            <p class="text-muted">Extract specific pages from a PDF document to create a new one.</p>
+            <a href="{% url 'extract_pdf' %}" class="btn btn-primary mt-3 px-4 py-2">Extract Pages</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
