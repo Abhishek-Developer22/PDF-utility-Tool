@@ -14,26 +14,25 @@ jobs:
         python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-django ruff
+
+      - name: Run system check
+        run: |
+          python manage.py check
+
       - name: Run migrations
-        env:
-          DJANGO_SETTINGS_MODULE: pdf_utility.settings
         run: |
           python manage.py migrate
+
       - name: Run tests
-        env:
-          DJANGO_SETTINGS_MODULE: pdf_utility.settings
-          PYTHONPATH: .
         run: |
-          python -m pytest -v
-      - name: Lint with ruff
-        run: |
-          ruff check .
+          python manage.py test
