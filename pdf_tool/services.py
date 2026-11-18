@@ -1,15 +1,13 @@
 import os
 import logging
 import logging.config
-from django.conf import settings
-logging.config.dictConfig(settings.LOGGING)
-logger = logging.getLogger('pdf_tool')
-
-from typing import List, Iterable
-
 import uuid
+from typing import Iterable
 from django.conf import settings
 from PyPDF2 import PdfReader, PdfWriter
+
+logging.config.dictConfig(settings.LOGGING)
+logger = logging.getLogger('pdf_tool')
 
 def ensure_media_dir() -> None:
     """Ensure that the MEDIA_ROOT directory exists."""

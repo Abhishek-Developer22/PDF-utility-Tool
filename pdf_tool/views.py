@@ -1,10 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse
 from .forms import MergeForm, ExtractForm
 from . import services
-import os
-from django.conf import settings
 import logging
+from django.conf import settings
 logger = logging.getLogger('pdf_tool')
 
 def home(request):
@@ -69,5 +68,4 @@ def view_logs(request):
             logs = "Log file is empty. No entries yet."
     except FileNotFoundError:
         logs = "Log file not found."
-    from django.http import HttpResponse
     return HttpResponse(f"<pre>{logs}</pre>")
