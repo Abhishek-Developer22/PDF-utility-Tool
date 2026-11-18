@@ -1,3 +1,4 @@
+import re
 from django import forms
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -27,8 +28,6 @@ class MergeForm(forms.Form):
             if not f.name.lower().endswith('.pdf'):
                 raise forms.ValidationError(f"File {f.name} is not a valid PDF.")
         return files
-
-import re
 
 class ExtractForm(forms.Form):
     pdf_file = forms.FileField(label='Select a PDF file', required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'accept': 'application/pdf'}))

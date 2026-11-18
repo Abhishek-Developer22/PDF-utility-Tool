@@ -23,11 +23,12 @@ def merge_pdfs(file_list: Iterable[str]) -> str:
 
     Returns the media URL of the merged PDF.
     """
-    logger.info("Merging %d PDF files", len(list(file_list)))
+    files = list(file_list)
+    logger.info("Merging %d PDF files", len(files))
     ensure_media_dir()
     pdf_writer = PdfWriter()
 
-    for file in file_list:
+    for file in files:
         logger.debug("Reading PDF file: %s", file)
         pdf_reader = PdfReader(file)
         for page in range(len(pdf_reader.pages)):
