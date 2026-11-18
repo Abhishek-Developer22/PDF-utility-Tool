@@ -17,7 +17,6 @@ A lightweight, powerful, and user-friendly web application built with **Django**
   - Enforces minimum file requirements (e.g., requires at least 2 files for merging).
   - Validates `.pdf` file types and checks for corrupted inputs.
   - Page range syntax validation using regular expressions.
-- **📊 Real-time Log Viewer:** Integrated logging system with an accessible web viewer (`/logs/`) to track operations and troubleshoot errors.
 - **🎨 Clean & Responsive UI:** Styled with modern CSS/Bootstrap for a seamless experience on desktop and mobile devices.
 - **⚡ Production Ready:** Pre-configured with **WhiteNoise** for serving static files, **Gunicorn** WSGI HTTP server, and automated **GitHub Actions CI**.
 
